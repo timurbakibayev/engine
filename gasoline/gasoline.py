@@ -8,7 +8,7 @@ class Gasoline(ABC):
     octane: float
 
 
-class UnwantedGasolineMix(Exception):
+class UnwantedGasolineMix(ValueError):
     pass
 
 
