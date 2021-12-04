@@ -26,5 +26,34 @@ class TestEngine:
         assert engine.rotations == 1000
 
     def test_standard_engine(self) -> None:
+        benzine95 = Benzine(octane=95)
         engine = Engine.produce_a_standard_benzine_engine()
         assert isinstance(engine, Engine)
+        rotations = engine.supply(
+            gas_portion=GasPortion(
+                gasoline=benzine95,
+                volume_liters=1,
+            ),
+            seconds=5,
+        )
+        assert rotations == 416.67
+
+        # more liters for the same time should not change anything:
+        rotations = engine.supply(
+            gas_portion=GasPortion(
+                gasoline=benzine95,
+                volume_liters=2,
+            ),
+            seconds=5,
+        )
+        assert rotations == 416.67
+
+        # but in a longer period, more rotations:
+        rotations = engine.supply(
+            gas_portion=GasPortion(
+                gasoline=benzine95,
+                volume_liters=2,
+            ),
+            seconds=60,
+        )
+        assert rotations == 833.33

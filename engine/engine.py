@@ -55,4 +55,6 @@ class Engine:
         # now convert rates per minute to rates per second
         rps = rpm / 60
         # and actually rotate the engine:
-        self.rotations += rps * seconds
+        rotations = round(rps * seconds, ndigits=2)
+        self.rotations += rotations
+        return rotations
