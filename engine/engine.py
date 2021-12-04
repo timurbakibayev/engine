@@ -10,11 +10,32 @@ class Engine:
     ):
         self.max_flow_speed_lps = max_flow_speed_lps
         self.max_rpm = max_rpm
+        self.gasoline = gasoline
         self.total_supplied_gas = GasPortion(
             gasoline=gasoline,
             volume_liters=0,
         )
         self.rotations = 0
+
+    @classmethod
+    def produce_a_standard_benzine_engine(cls):
+        class Benzine(Gasoline):
+            pass
+
+        benzine95 = Benzine(octane=95)
+        return cls(
+            gasoline=benzine95,
+        )
+
+    @classmethod
+    def produce_a_standard_diesel_engine(cls):
+        class Diesel(Gasoline):
+            pass
+
+        diesel70 = Diesel(octane=95)
+        return cls(
+            gasoline=diesel70,
+        )
 
     def supply(
             self,
@@ -29,7 +50,7 @@ class Engine:
             0.2
         )
         flow_speed_relative = flow_speed / self.max_flow_speed_lps
-        octane_relative = gas_portion.gasoline.octane / 100
+        octane_relative = gas_portion.gasoline.octane / self.gasoline.octane
         rpm = self.max_rpm * flow_speed_relative * octane_relative
         # now convert rates per minute to rates per second
         rps = rpm / 60

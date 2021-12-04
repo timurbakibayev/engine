@@ -18,7 +18,7 @@ class GasPortion:
     volume_liters: float
 
     def __add__(self, other:"GasPortion") -> "GasPortion":
-        if type(self.gasoline) != type(other.gasoline):
+        if type(self.gasoline).__name__ != type(other.gasoline).__name__:
             raise UnwantedGasolineMix
         volume_liters = self.volume_liters + other.volume_liters
         octane = self.gasoline.octane * (self.volume_liters / volume_liters)
