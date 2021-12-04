@@ -29,10 +29,10 @@ class GasPump:
         if voltage > 14:
             raise TooHighVoltage
         flow_lps = self.max_flow_lps * voltage / 12
-        volume = max(
+        volume = round(min(
             self.connected_gas_tank.volume_liters,
             flow_lps * seconds
-        )
+        ), ndigits=2)
         self.connected_gas_tank.volume_liters -= volume
         return dataclasses.replace(
             self.connected_gas_tank,

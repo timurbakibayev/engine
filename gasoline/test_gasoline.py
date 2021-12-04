@@ -9,12 +9,10 @@ from gasoline.gasoline import (
 )
 
 
-@dataclass
 class Benzine(Gasoline):
     pass
 
 
-@dataclass
 class Diesel(Gasoline):
     pass
 
