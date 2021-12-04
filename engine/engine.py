@@ -47,7 +47,7 @@ class Engine:
         self.total_supplied_gas += gas_portion
         flow_speed = min(
             gas_portion.volume_liters / seconds,
-            0.2
+            self.max_flow_speed_lps
         )
         flow_speed_relative = flow_speed / self.max_flow_speed_lps
         octane_relative = gas_portion.gasoline.octane / self.gasoline.octane
