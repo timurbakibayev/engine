@@ -1,5 +1,8 @@
 import dataclasses
 from dataclasses import dataclass
+from typing import Optional
+
+from engine.engine import Engine
 from gasoline.gasoline import (
     Gasoline,
     GasPortion,
@@ -17,6 +20,7 @@ class TooHighVoltage(ValueError):
 @dataclass
 class GasPump:
     connected_gas_tank: GasPortion
+    connected_engine: Optional[Engine]
     max_flow_lps: float  # liters per second
 
     def apply(
@@ -34,7 +38,13 @@ class GasPump:
             flow_lps * seconds
         ), ndigits=2)
         self.connected_gas_tank.volume_liters -= volume
-        return dataclasses.replace(
-            self.connected_gas_tank,
-            volume_liters=volume
-        )
+        gas_portion = dataclasses.replace(
+                self.connected_gas_tank,
+                volume_liters=volume
+            )
+        if self.connected_engine is not None:
+            self.connected_engine.supply(
+                gas_portion=gas_portion,
+                seconds=seconds,
+            )
+        return gas_portion

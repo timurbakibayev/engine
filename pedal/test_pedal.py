@@ -1,12 +1,13 @@
 from gasoline.gasoline import GasPortion, Gasoline
 from gaspump.gaspump import GasPump
+from pedal.pedal import Pedal
 
 
 class Benzine(Gasoline):
     pass
 
 
-class TestGasPump:
+class TestPedal:
     def test_gas_pump(self) -> None:
         gas_tank = GasPortion(
             gasoline=Benzine(
@@ -19,11 +20,20 @@ class TestGasPump:
             connected_engine=None,
             max_flow_lps=0.2,
         )
-        output_gas = gas_pump.apply(
-            voltage=6,
+        pedal = Pedal(
+            connected_gas_pump=gas_pump,
+        )
+
+        output_gas = pedal.press(
+            how_hard=0.5,
             seconds=5,
         )
-        # flow speed = 0.2, we apply it for 5 seconds, so it makes 1l.
-        # voltage = 6 (of max 12), so we divide it by 2,
-        # should be 0.5 in the end.
+
         assert output_gas.volume_liters == 0.5
+
+        output_gas = pedal.press(
+            how_hard=1,
+            seconds=10,
+        )
+
+        assert output_gas.volume_liters == 2
