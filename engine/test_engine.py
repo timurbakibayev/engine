@@ -8,7 +8,6 @@ class Benzine(Gasoline):
 
 class TestEngine:
     def test_engine(self) -> None:
-        benzine95 = Benzine(octane=95)
         benzine100 = Benzine(octane=100)
         engine = Engine(
             gasoline=benzine100,
