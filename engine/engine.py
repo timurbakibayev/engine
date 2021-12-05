@@ -1,4 +1,4 @@
-from gasoline.gasoline import GasPortion, Gasoline, UnwantedGasolineMix
+from gasoline.gasoline import GasPortion, Gasoline
 
 
 class Engine:
@@ -42,6 +42,7 @@ class Engine:
             gas_portion: GasPortion,
             seconds: float,
     ):
+        self.haha = 5
         if gas_portion.volume_liters <= 0 or seconds <= 0:
             return
         self.total_supplied_gas += gas_portion

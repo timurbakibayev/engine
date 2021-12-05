@@ -3,10 +3,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from engine.engine import Engine
-from gasoline.gasoline import (
-    Gasoline,
-    GasPortion,
-)
+from gasoline.gasoline import GasPortion
 
 
 class NegativeVoltage(ValueError):

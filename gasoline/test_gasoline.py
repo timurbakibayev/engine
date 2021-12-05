@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 import pytest
 
 from gasoline.gasoline import (
