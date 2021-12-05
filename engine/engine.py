@@ -6,7 +6,7 @@ class Engine:
             self,
             gasoline: Gasoline,
             max_flow_speed_lps: float = 0.2,
-            max_rpm:float = 5000,
+            max_rpm: float = 5000,
     ):
         self.max_flow_speed_lps = max_flow_speed_lps
         self.max_rpm = max_rpm
@@ -15,7 +15,7 @@ class Engine:
             gasoline=gasoline,
             volume_liters=0,
         )
-        self.rotations = 0
+        self.rotations: float = 0
 
     @classmethod
     def produce_a_standard_benzine_engine(cls):
